@@ -23,6 +23,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCapsuleComponent* CapsuleComp; //using forward declaration
 };
