@@ -25,4 +25,10 @@ public:
 private:
     UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCapsuleComponent* CapsuleComp; //using forward declaration
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* BaseMesh;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* TurretMesh;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USceneComponent* ProjectileSpawnPoint;
 };
