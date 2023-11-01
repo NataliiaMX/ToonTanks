@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "BasePawn.h"
+#include "InputActionValue.h"
 #include "Tank.generated.h"
-
 
 
 
@@ -16,13 +16,25 @@ class TOONTANKS_API ATank : public ABasePawn
 
 	public:
 		ATank();
+		virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	protected:
+		virtual void BeginPlay() override;
+
+		UPROPERTY(EditAnywhere, Category = "Input")
+		class UInputMappingContext* MainMappingContext;
+
+		UPROPERTY(EditAnywhere, Category = "Input")
+		class UInputAction* MoveAction;
+
+		void Move(const FInputActionValue& Value);
+
+		
 
 	private:
-		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		UPROPERTY(EditAnywhere, Category = "Components")
 		class USpringArmComponent* SpringArm;
 		
-		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		UPROPERTY(VisibleAnywhere, Category = "Components")
 		class UCameraComponent* Camera;
-
-	
 };
