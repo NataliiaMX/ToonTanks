@@ -36,7 +36,8 @@ void ATank::BeginPlay()
 void ATank::Move(const FInputActionValue& Value)
 {
     FVector2D CurrentValue = Value.Get<FVector2D>();
-    UE_LOG(LogTemp, Display, TEXT("Move triggered, Value is: %s"), *CurrentValue.ToString());
+    FVector Offset3D(CurrentValue.X, CurrentValue.Y, 0.0f);
+    AddActorLocalOffset(Offset3D * 10);
 }
 
 void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)

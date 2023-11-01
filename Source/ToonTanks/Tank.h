@@ -29,8 +29,6 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		void Move(const FInputActionValue& Value);
 
-		
-
 	private:
 		UPROPERTY(EditAnywhere, Category = "Components")
 		class USpringArmComponent* SpringArm;
