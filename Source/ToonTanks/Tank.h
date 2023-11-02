@@ -30,6 +30,8 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		void Move(const FInputActionValue& Value);
 
+		void Turn(const FInputActionValue& Value);
+
 	private:
 		UPROPERTY(EditAnywhere, Category = "Components")
 		class USpringArmComponent* SpringArm;
@@ -39,4 +41,7 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 		float Speed = 200.f;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+		float TurnRate = 100.f;
 };

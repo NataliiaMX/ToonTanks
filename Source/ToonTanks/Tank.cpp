@@ -37,9 +37,19 @@ void ATank::BeginPlay()
 void ATank::Move(const FInputActionValue& Value)
 {
     FVector2D CurrentValue = Value.Get<FVector2D>();
-    FVector Offset3D(CurrentValue.X, CurrentValue.Y, 0.0f);
+    FVector Offset3D(CurrentValue.X, 0.0f, 0.0f);
     float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
-    AddActorLocalOffset(Offset3D * Speed * DeltaTime);
+    FVector DeltaLocation = Offset3D * Speed * DeltaTime;
+    bool DoesSweep = true;
+    AddActorLocalOffset(DeltaLocation, DoesSweep);
+    
+    FRotator DeltaRotation = FRotator::ZeroRotator;
+    DeltaRotation.Yaw = CurrentValue.Y * TurnRate * DeltaTime;  
+    AddActorLocalRotation(DeltaRotation);
+}
+
+void ATank::Turn(const FInputActionValue &Value)
+{
 }
 
 void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
