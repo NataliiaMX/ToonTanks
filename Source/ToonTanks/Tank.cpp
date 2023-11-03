@@ -22,19 +22,10 @@ void ATank::BeginPlay()
 {
     Super::BeginPlay();
 
-    APlayerController* PlayerController = Cast<APlayerController>(Controller);
-    if(PlayerController)
-    {
-        UEnhancedInputLocalPlayerSubsystem* Subsystem = 
-                    ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-        if(Subsystem)
-        {
-            Subsystem->AddMappingContext(MainMappingContext, 0);
-        }
-    }
 }
 
-void ATank::Move(const FInputActionValue& Value)
+//movement
+void ATank::Move(const FInputActionValue &Value)
 {
     FVector2D CurrentValue = Value.Get<FVector2D>();
     FVector Offset3D(CurrentValue.X, 0.0f, 0.0f);
@@ -45,15 +36,32 @@ void ATank::Move(const FInputActionValue& Value)
     
     FRotator DeltaRotation = FRotator::ZeroRotator;
     DeltaRotation.Yaw = CurrentValue.Y * TurnRate * DeltaTime;  
-    AddActorLocalRotation(DeltaRotation);
+    AddActorLocalRotation(DeltaRotation, DoesSweep);
 }
 
-void ATank::Turn(const FInputActionValue &Value)
+//controller and input setup
+APlayerController* ATank::GetPlayerController()
 {
+    APlayerController* PlayerController = Cast<APlayerController>(Controller);
+    return PlayerController;
+}
+
+void ATank::SetupPlayerController()
+{
+    if(GetPlayerController())
+    {
+        UEnhancedInputLocalPlayerSubsystem* Subsystem = 
+                    ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetPlayerController()->GetLocalPlayer());
+        if(Subsystem)
+        {
+            Subsystem->AddMappingContext(MainMappingContext, 0);
+        }
+    }
 }
 
 void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
+    SetupPlayerController();
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 
     if(UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
@@ -61,3 +69,4 @@ void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
     }
 }
+    

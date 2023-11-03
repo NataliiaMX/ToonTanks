@@ -19,6 +19,8 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+		APlayerController* GetPlayerController();
+
 	protected:
 		virtual void BeginPlay() override;
 
@@ -28,9 +30,9 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(EditAnywhere, Category = "Input")
 		class UInputAction* MoveAction;
 
-		void Move(const FInputActionValue& Value);
+		void SetupPlayerController();
 
-		void Turn(const FInputActionValue& Value);
+		void Move(const FInputActionValue& Value);
 
 	private:
 		UPROPERTY(EditAnywhere, Category = "Components")
