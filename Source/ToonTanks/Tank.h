@@ -15,11 +15,10 @@ class TOONTANKS_API ATank : public ABasePawn
 	GENERATED_BODY() //must remain on line 15
 
 	public:
+		virtual void Tick(float DeltaTime) override;
 		ATank();
 
 		virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
-		APlayerController* GetPlayerController();
 
 	protected:
 		virtual void BeginPlay() override;
@@ -30,9 +29,16 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(EditAnywhere, Category = "Input")
 		class UInputAction* MoveAction;
 
-		void SetupPlayerController();
+		UPROPERTY(EditAnywhere, Category = "Input")
+		class UInputAction* FireAction;
 
 		void Move(const FInputActionValue& Value);
+
+		void Fire(const FInputActionValue& Value);
+
+		APlayerController* GetPlayerController();
+
+		void SetupMappingContext();
 
 	private:
 		UPROPERTY(EditAnywhere, Category = "Components")

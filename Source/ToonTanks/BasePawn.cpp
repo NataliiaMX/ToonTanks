@@ -1,6 +1,7 @@
 
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ABasePawn::ABasePawn()
 {
@@ -19,16 +20,14 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
-
-void ABasePawn::Tick(float DeltaTime)
+void ABasePawn::RotateTurret(FVector TargetLocation)
 {
-	Super::Tick(DeltaTime);
-
+	FVector ToTarget = TargetLocation - TurretMesh->GetComponentLocation();
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
+	float RotationSpeed = 15.f;
+	TurretMesh->SetWorldRotation
+				(FMath::RInterpTo
+					(TurretMesh->GetComponentRotation(), LookAtRotation, 
+								UGameplayStatics::GetWorldDeltaSeconds(this), RotationSpeed));
+	//setting world rotation here bc all variables above are world loc vars, interpolating
 }
-
-void ABasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-

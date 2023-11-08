@@ -12,12 +12,10 @@ class TOONTANKS_API ABasePawn : public APawn
 	GENERATED_BODY() //must remain on line 12
 
 public:
-	ABasePawn(); //class constructor
+	ABasePawn();
 
-public:	
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+protected:
+	void RotateTurret(FVector TargetLocation);
 
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

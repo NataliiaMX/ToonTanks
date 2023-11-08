@@ -24,6 +24,18 @@ void ATank::BeginPlay()
 
 }
 
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+    if(GetPlayerController())
+    {
+        FHitResult HitResult;
+        GetPlayerController()->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
+        RotateTurret(HitResult.ImpactPoint);
+    }
+}
+
 //movement
 void ATank::Move(const FInputActionValue &Value)
 {
@@ -39,6 +51,11 @@ void ATank::Move(const FInputActionValue &Value)
     AddActorLocalRotation(DeltaRotation, DoesSweep);
 }
 
+void ATank::Fire(const FInputActionValue& Value)
+{
+    
+}
+
 //controller and input setup
 APlayerController* ATank::GetPlayerController()
 {
@@ -46,7 +63,7 @@ APlayerController* ATank::GetPlayerController()
     return PlayerController;
 }
 
-void ATank::SetupPlayerController()
+void ATank::SetupMappingContext()
 {
     if(GetPlayerController())
     {
@@ -61,12 +78,13 @@ void ATank::SetupPlayerController()
 
 void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
-    SetupPlayerController();
+    SetupMappingContext();
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 
     if(UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
     {
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
+        EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::Fire);
     }
 }
     
