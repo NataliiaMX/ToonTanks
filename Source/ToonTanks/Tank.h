@@ -1,6 +1,6 @@
 
-
 #pragma once
+
 
 #include "CoreMinimal.h"
 #include "BasePawn.h"
@@ -33,8 +33,6 @@ class TOONTANKS_API ATank : public ABasePawn
 		class UInputAction* FireAction;
 
 		void Move(const FInputActionValue& Value);
-
-		void Fire(const FInputActionValue& Value);
 
 		APlayerController* GetPlayerController();
 

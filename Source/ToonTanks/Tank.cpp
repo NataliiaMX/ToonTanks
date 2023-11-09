@@ -51,10 +51,6 @@ void ATank::Move(const FInputActionValue &Value)
     AddActorLocalRotation(DeltaRotation, DoesSweep);
 }
 
-void ATank::Fire(const FInputActionValue& Value)
-{
-    
-}
 
 //controller and input setup
 APlayerController* ATank::GetPlayerController()

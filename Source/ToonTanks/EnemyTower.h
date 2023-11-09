@@ -27,4 +27,12 @@ class TOONTANKS_API AEnemyTower : public ABasePawn
 
 		UPROPERTY(EditDefaultsOnly, Category = "Combat")
 		float FireRange = 20.f;
+
+		FTimerHandle FireRateTimerHandle;
+
+		float FireRate = 2.f;
+
+		void CheckFireDistance();
+
+		bool IsPawnInRange();
 };

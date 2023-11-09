@@ -2,6 +2,7 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Projectile.h"
 
 ABasePawn::ABasePawn()
 {
@@ -30,4 +31,10 @@ void ABasePawn::RotateTurret(FVector TargetLocation)
 					(TurretMesh->GetComponentRotation(), LookAtRotation, 
 								UGameplayStatics::GetWorldDeltaSeconds(this), RotationSpeed));
 	//setting world rotation here bc all variables above are world loc vars, interpolating
+}
+
+void ABasePawn::Fire()
+{
+	GetWorld()->SpawnActor<AProjectile>(ProjectileBPClass,
+						   ProjectileSpawnPoint->GetComponentLocation(), ProjectileSpawnPoint->GetComponentRotation());
 }
