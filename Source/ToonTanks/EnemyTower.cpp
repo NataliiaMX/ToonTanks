@@ -9,6 +9,13 @@ AEnemyTower::AEnemyTower()
     PrimaryActorTick.bCanEverTick = true;
 }
 
+void AEnemyTower::HandleDestruction()
+{
+    Super::HandleDestruction();
+    Destroy();
+
+}
+
 void AEnemyTower::BeginPlay()
 {
     Super::BeginPlay();

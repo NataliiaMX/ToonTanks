@@ -29,4 +29,6 @@ private:
 	UFUNCTION()
 	void HandleDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, 
 						   class AController* Instigator, AActor* DamageCauser);
+
+	class AToonTanksGameMode* GameMode;
 };

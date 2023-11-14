@@ -20,6 +20,10 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+		void HandleDestruction();
+
+		APlayerController* GetPlayerController();
+
 	protected:
 		virtual void BeginPlay() override;
 
@@ -33,8 +37,6 @@ class TOONTANKS_API ATank : public ABasePawn
 		class UInputAction* FireAction;
 
 		void Move(const FInputActionValue& Value);
-
-		APlayerController* GetPlayerController();
 
 		void SetupMappingContext();
 
