@@ -24,4 +24,8 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 		class ATank* Tank;
 
 		class AToonTanksPlayerController* ToonTanksPlayerController;
+
+		float StartDelay = 2.f;
+
+		void HandleGameStart();
 };
