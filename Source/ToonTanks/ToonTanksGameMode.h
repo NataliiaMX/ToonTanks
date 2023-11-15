@@ -23,6 +23,9 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 		UFUNCTION(BlueprintImplementableEvent)
 		void StartGame();
 
+		UFUNCTION(BlueprintImplementableEvent)
+		void HandleGameFinish(bool bDidWin);
+
 	private:
 		class ATank* Tank;
 
@@ -31,4 +34,8 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 		float StartDelay = 4.f;
 
 		void HandleGameStart();
+
+		int32 TargetTowers = 0;
+
+		int32 GetTowerCount();
 };

@@ -35,7 +35,7 @@ void UHealthComponent::HandleDamageTaken(AActor* DamagedActor, float Damage, con
 	if (Damage <= 0.f) return;
 
 	CurrentHealth-=Damage;
-
+	
 	if (CurrentHealth <= 0.f && GameMode)
 	{
 		GameMode->HanldeActorDeath(DamagedActor);
