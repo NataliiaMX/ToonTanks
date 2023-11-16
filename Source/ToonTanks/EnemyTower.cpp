@@ -38,7 +38,11 @@ void AEnemyTower::Tick(float DeltaTime)
 
 void AEnemyTower::CheckFireDistance()
 {
-    if (IsPawnInRange())
+    if(Tank == nullptr) 
+    {
+        return;
+    }
+    if (IsPawnInRange() && Tank->bAlive)
     {
         Fire();
     }

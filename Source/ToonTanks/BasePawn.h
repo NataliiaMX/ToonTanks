@@ -16,6 +16,8 @@ public:
 
 	void HandleDestruction();
 
+	void Explode();
+
 protected:
 	void RotateTurret(FVector TargetLocation);
 
@@ -36,4 +38,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileBPClass; //set to BP_Projectile class in editor
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	class UParticleSystem* ParticleExplosion;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 };

@@ -4,6 +4,7 @@
 #include "Tank.h"
 #include "EnemyTower.h"
 #include "ToonTanksPlayerController.h"
+#include "BasePawn.h"
 
 void AToonTanksGameMode::BeginPlay()
 {
@@ -17,6 +18,8 @@ void AToonTanksGameMode::HandleGameStart()
     TargetTowers = GetTowerCount();
 
     Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+    UGameplayStatics::PlaySoundAtLocation(this, GameMusic, Tank->GetActorLocation());
 
     ToonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 

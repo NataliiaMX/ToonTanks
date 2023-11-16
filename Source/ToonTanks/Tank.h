@@ -24,6 +24,8 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		APlayerController* GetPlayerController();
 
+		bool bAlive = true;
+
 	protected:
 		virtual void BeginPlay() override;
 

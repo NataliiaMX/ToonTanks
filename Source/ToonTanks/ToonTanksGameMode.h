@@ -38,4 +38,7 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 		int32 TargetTowers = 0;
 
 		int32 GetTowerCount();
+
+		UPROPERTY(EditAnywhere, Category = "Sounds")
+		class USoundBase* GameMusic;
 };
